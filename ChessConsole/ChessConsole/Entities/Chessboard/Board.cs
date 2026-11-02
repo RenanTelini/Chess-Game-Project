@@ -4,13 +4,13 @@
     {
         public int Lines { get; set; }
         public int Columns { get; set; }
-        private Piece[,] Piece { get; set; }
+        private Piece[,] Pieces { get; set; }
 
         public Board(int lines, int columns)
         {
             Lines = lines;
             Columns = columns;
-            Piece = new Piece[lines, columns];
+            Pieces = new Piece[lines, columns];
         }
     }
 }
