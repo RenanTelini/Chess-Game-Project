@@ -1,4 +1,5 @@
-﻿using ChessConsole.Entities.Chessboard;
+﻿using ChessConsole.Entities;
+using ChessConsole.Entities.Chessboard;
 
 namespace ChessConsole
 {
@@ -6,7 +7,9 @@ namespace ChessConsole
     {
         static void Main(string[] args)
         {
-            Board p = new Board(8, 8);
+            Board board = new Board(8, 8);
+
+            Screen.DisplayBoard(board);
         }
     }
 }
