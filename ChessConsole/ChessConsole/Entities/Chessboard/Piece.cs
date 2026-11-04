@@ -16,5 +16,10 @@ namespace ChessConsole.Entities.Chessboard
             Board = board;
             QtyMovements = 0;
         }
+
+        public void IncrementQtyMovements()
+        {
+            QtyMovements++;
+        }
     }
 }

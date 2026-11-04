@@ -34,6 +34,17 @@ namespace ChessConsole.Entities.Chessboard
             p.Position = pos;
         }
 
+        public Piece RemovePiece(Position pos)
+        {
+            if (GetPieces(pos) == null)
+                return null;
+
+            Piece aux = GetPieces(pos);
+            aux.Position = null;
+            Pieces[pos.Line, pos.Column] = null;
+            return aux;
+        }
+
         public bool ExistPiece(Position pos)
         {
             ValidatePosition(pos);
