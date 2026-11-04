@@ -9,21 +9,12 @@ namespace ChessConsole
     {
         static void Main(string[] args)
         {
-            try
-            {
 
-                Board board = new Board(8, 8);
+            ChessPosition pos = new ChessPosition('c', 7);
 
-                board.SetPiecePosition(new Rook(board, Entities.Enums.Color.Black), new Position(0, 0));
-                board.SetPiecePosition(new Rook(board, Entities.Enums.Color.Black), new Position(1, 9));
-                board.SetPiecePosition(new King(board, Entities.Enums.Color.Black), new Position(0, 0));
+            Console.WriteLine(pos);
 
-                Screen.DisplayBoard(board);
-            }
-            catch (BoardException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            Console.WriteLine(pos.ToPosition());
         }
     }
 }
