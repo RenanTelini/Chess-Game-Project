@@ -1,4 +1,5 @@
 ﻿using ChessConsole.Entities.Chessboard;
+using ChessConsole.Exceptions;
 using ChessConsole.Entities.Enums;
 
 namespace ChessConsole.Entities.Chess
@@ -6,15 +7,15 @@ namespace ChessConsole.Entities.Chess
     class ChessMatch
     {
         public Board ChessBoard { get; private set; }
-        private int _turn;
-        private Color _currentPlayer;
+        public int Turn { get; private set; }
+        public Color CurrentPlayer { get; private set; }
         public bool Fineshed { get; private set; }
 
         public ChessMatch()
         {
             ChessBoard = new Board(8, 8);
-            _turn = 1;
-            _currentPlayer = Color.White;
+            Turn = 1;
+            CurrentPlayer = Color.White;
             Fineshed = false;
             SetPieces();
         }
@@ -25,6 +26,39 @@ namespace ChessConsole.Entities.Chess
             p.IncrementQtyMovements();
             Piece capturedPiece = ChessBoard.RemovePiece(destination);
             ChessBoard.SetPiecePosition(p, destination);
+        }
+
+        public void MakeMove(Position origin, Position destination)
+        {
+            RunMovement(origin, destination);
+            Turn++;
+            ChangePlayer();
+        }
+
+        public void ValidateOriginPosition(Position pos)
+        {
+            if (ChessBoard.GetPieces(pos) == null)
+                throw new BoardException("There's no piece at the chosen starting position!");
+
+            if (CurrentPlayer != ChessBoard.GetPieces(pos).Color)
+                throw new BoardException("The chess piece you selected as the starting piece is not yours!");
+
+            if (!ChessBoard.GetPieces(pos).ExistPossibleMovements())
+                throw new BoardException("There are no possible moves for the chosen piece!");
+        }
+
+        public void ValidateDestinationPosition(Position origin, Position destination)
+        {
+            if (!ChessBoard.GetPieces(origin).CanMoveTo(destination))
+                throw new BoardException("Invalid destination position!");
+        }
+
+        private void ChangePlayer()
+        {
+            if (CurrentPlayer == Color.White)
+                CurrentPlayer = Color.Black;
+            else
+                CurrentPlayer = Color.White;
         }
 
         private void SetPieces()
