@@ -2,7 +2,7 @@
 
 namespace ChessConsole.Entities.Chessboard
 {
-    class Piece
+    abstract class Piece
     {
         public Position Position { get; set; }
         public Color Color { get; protected set; }
@@ -21,5 +21,7 @@ namespace ChessConsole.Entities.Chessboard
         {
             QtyMovements++;
         }
+
+        public abstract bool[,] PossibleMoves();
     }
 }
