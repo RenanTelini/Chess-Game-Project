@@ -1,6 +1,6 @@
 ﻿using ChessConsole.Entities.Chessboard;
 
-namespace ChessConsole.Entities.ChessPieces
+namespace ChessConsole.Entities.Chess
 {
     class ChessPosition
     {

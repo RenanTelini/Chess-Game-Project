@@ -1,7 +1,7 @@
 ﻿using ChessConsole.Entities.Chessboard;
 using ChessConsole.Entities.Enums;
 
-namespace ChessConsole.Entities.ChessPieces
+namespace ChessConsole.Entities.Chess
 {
     class Rook : Piece
     {

@@ -1,7 +1,6 @@
 ﻿using ChessConsole.Entities;
 using ChessConsole.Exceptions;
 using ChessConsole.Entities.Chess;
-using ChessConsole.Entities.ChessPieces;
 using ChessConsole.Entities.Chessboard;
 
 namespace ChessConsole
