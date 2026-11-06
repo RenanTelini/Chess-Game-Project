@@ -20,10 +20,7 @@ namespace ChessConsole
                     {
 
                         Console.Clear();
-                        Screen.DisplayBoard(game.ChessBoard);
-                        Console.WriteLine();
-                        Console.WriteLine("Turn: " + game.Turn);
-                        Console.WriteLine("Waiting for move: " + game.CurrentPlayer);
+                        Screen.DisplayGame(game);
 
                         Console.WriteLine();
                         Console.Write("Origin: ");

@@ -1,10 +1,50 @@
 ﻿using ChessConsole.Entities.Chessboard;
 using ChessConsole.Entities.Chess;
+using ChessConsole.Entities.Enums;
 
 namespace ChessConsole.Entities
 {
     class Screen
     {
+        public static void DisplayGame(ChessMatch game)
+        {
+            DisplayBoard(game.ChessBoard);
+            Console.WriteLine();
+            DisplayCapturedPieces(game);
+            Console.WriteLine();
+            Console.WriteLine("Turn: " + game.Turn);
+            Console.WriteLine("Waiting for move: " + game.CurrentPlayer);
+        }
+
+        public static void DisplayCapturedPieces(ChessMatch game)
+        {
+            Console.WriteLine("Captured pieces:");
+            Console.Write("White: ");
+            DisplaySet(game.PiecesCaptured(Enums.Color.White));
+            Console.WriteLine();
+
+            Console.Write("Black: ");
+
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+
+            DisplaySet(game.PiecesCaptured(Enums.Color.Black));
+
+            Console.ForegroundColor = aux;
+            Console.WriteLine();
+        }
+
+        public static void DisplaySet(HashSet<Piece> set)
+        {
+            Console.Write("[");
+            foreach (Piece x in set)
+            {
+                Console.Write(x + " ");
+            }
+            Console.Write("]");
+        }
+
+
         public static void DisplayBoard(Board board)
         {
             for (int i = 0; i < board.Lines; i++)
@@ -37,7 +77,7 @@ namespace ChessConsole.Entities
                         Console.BackgroundColor = originalBackground;
 
                     PrintPiece(board.GetPieces(i, j));
-                    
+
                     Console.BackgroundColor = originalBackground;
                 }
                 Console.WriteLine();
