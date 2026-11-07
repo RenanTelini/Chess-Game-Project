@@ -22,6 +22,11 @@ namespace ChessConsole.Entities.Chessboard
             QtyMovements++;
         }
 
+        public void DecrementQtyMovements()
+        {
+            QtyMovements--;
+        }
+
         public bool ExistPossibleMovements()
         {
             bool[,] mat = PossibleMoves();
