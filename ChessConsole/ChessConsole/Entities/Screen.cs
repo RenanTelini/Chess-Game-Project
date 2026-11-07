@@ -1,6 +1,5 @@
 ﻿using ChessConsole.Entities.Chessboard;
 using ChessConsole.Entities.Chess;
-using ChessConsole.Entities.Enums;
 
 namespace ChessConsole.Entities
 {

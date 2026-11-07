@@ -1,8 +1,6 @@
 ﻿using ChessConsole.Entities.Chessboard;
 using ChessConsole.Entities.Enums;
 using ChessConsole.Exceptions;
-using System.Reflection.PortableExecutable;
-using System.Text.RegularExpressions;
 
 namespace ChessConsole.Entities.Chess
 {
