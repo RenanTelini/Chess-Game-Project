@@ -12,10 +12,20 @@ namespace ChessConsole.Entities
             DisplayCapturedPieces(game);
             Console.WriteLine();
             Console.WriteLine("Turn: " + game.Turn);
-            Console.WriteLine("Waiting for move: " + game.CurrentPlayer);
 
-            if (game.Check)
-                Console.WriteLine("CHECK!");
+            if (!game.Fineshed)
+            {
+                Console.WriteLine("Waiting for move: " + game.CurrentPlayer);
+
+                if (game.Check)
+                    Console.WriteLine("CHECK!");
+            }
+            else
+            {
+                Console.WriteLine("CHECKMATE!");
+                Console.WriteLine("Winner: " + game.CurrentPlayer);
+            }
+            
         }
 
         public static void DisplayCapturedPieces(ChessMatch game)

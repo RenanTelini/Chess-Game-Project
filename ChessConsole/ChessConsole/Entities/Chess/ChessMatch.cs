@@ -66,8 +66,13 @@ namespace ChessConsole.Entities.Chess
             else
                 Check = false;
 
-            Turn++;
-            ChangePlayer();
+            if (TestCheckMate(OpposingPiece(CurrentPlayer)))
+                Fineshed = true;
+            else
+            {
+                Turn++;
+                ChangePlayer();
+            }
         }
 
         public void ValidateOriginPosition(Position pos)
@@ -152,6 +157,34 @@ namespace ChessConsole.Entities.Chess
             return false;
         }
 
+        public bool TestCheckMate(Color color)
+        {
+            if (!IsKingInCheck(color))
+                return false;
+
+            foreach (Piece x in PiecesInPlay(color))
+            {
+                bool[,] mat = x.PossibleMoves();
+                for (int i = 0; i < ChessBoard.Lines; i++)
+                {
+                    for (int j = 0; j < ChessBoard.Columns; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Position origin = x.Position;
+                            Position destination = new Position(i, j);
+                            Piece capturedPiece = RunMovement(origin, destination);
+                            bool testCheck = IsKingInCheck(color);
+                            UndoMove(origin, destination, capturedPiece);
+                            if (!testCheck)
+                                return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+        
         public void SetNewPiece(char column, int line, Piece piece)
         {
             ChessBoard.SetPiecePosition(piece, new ChessPosition(column, line).ToPosition());
@@ -161,18 +194,11 @@ namespace ChessConsole.Entities.Chess
         private void SetPieces()
         {
             SetNewPiece('c', 1, new Rook(ChessBoard, Color.White));
-            SetNewPiece('c', 2, new Rook(ChessBoard, Color.White));
-            SetNewPiece('d', 2, new Rook(ChessBoard, Color.White));
-            SetNewPiece('e', 2, new Rook(ChessBoard, Color.White));
-            SetNewPiece('e', 1, new Rook(ChessBoard, Color.White));
+            SetNewPiece('h', 7, new Rook(ChessBoard, Color.White));
             SetNewPiece('d', 1, new King(ChessBoard, Color.White));
 
-            SetNewPiece('c', 7, new Rook(ChessBoard, Color.Black));
-            SetNewPiece('c', 8, new Rook(ChessBoard, Color.Black));
-            SetNewPiece('d', 7, new Rook(ChessBoard, Color.Black));
-            SetNewPiece('e', 7, new Rook(ChessBoard, Color.Black));
-            SetNewPiece('e', 8, new Rook(ChessBoard, Color.Black));
-            SetNewPiece('d', 8, new King(ChessBoard, Color.Black));
+            SetNewPiece('b', 8, new Rook(ChessBoard, Color.Black));
+            SetNewPiece('a', 8, new King(ChessBoard, Color.Black));
         }
     }
 }
