@@ -1,6 +1,7 @@
 ﻿using ChessConsole.Entities.Chessboard;
 using ChessConsole.Entities.Enums;
 using ChessConsole.Exceptions;
+using System.Runtime.ConstrainedExecution;
 
 namespace ChessConsole.Entities.Chess
 {
@@ -193,12 +194,39 @@ namespace ChessConsole.Entities.Chess
 
         private void SetPieces()
         {
-            SetNewPiece('c', 1, new Rook(ChessBoard, Color.White));
-            SetNewPiece('h', 7, new Rook(ChessBoard, Color.White));
-            SetNewPiece('d', 1, new King(ChessBoard, Color.White));
+            SetNewPiece('a', 1, new Rook(ChessBoard, Color.White));
+            SetNewPiece('b', 1, new Knight(ChessBoard, Color.White));
+            SetNewPiece('c', 1, new Bishop(ChessBoard, Color.White));
+            SetNewPiece('d', 1, new Queen(ChessBoard, Color.White));
+            SetNewPiece('e', 1, new King(ChessBoard, Color.White));
+            SetNewPiece('f', 1, new Bishop(ChessBoard, Color.White));
+            SetNewPiece('g', 1, new Knight(ChessBoard, Color.White));
+            SetNewPiece('h', 1, new Rook(ChessBoard, Color.White));
+            SetNewPiece('a', 2, new Pawn(ChessBoard, Color.White));
+            SetNewPiece('b', 2, new Pawn(ChessBoard, Color.White));
+            SetNewPiece('c', 2, new Pawn(ChessBoard, Color.White));
+            SetNewPiece('d', 2, new Pawn(ChessBoard, Color.White));
+            SetNewPiece('e', 2, new Pawn(ChessBoard, Color.White));
+            SetNewPiece('f', 2, new Pawn(ChessBoard, Color.White));
+            SetNewPiece('g', 2, new Pawn(ChessBoard, Color.White));
+            SetNewPiece('h', 2, new Pawn(ChessBoard, Color.White));
 
-            SetNewPiece('b', 8, new Rook(ChessBoard, Color.Black));
-            SetNewPiece('a', 8, new King(ChessBoard, Color.Black));
+            SetNewPiece('a', 8, new Rook(ChessBoard, Color.Black));
+            SetNewPiece('b', 8, new Knight(ChessBoard, Color.Black));
+            SetNewPiece('c', 8, new Bishop(ChessBoard, Color.Black));
+            SetNewPiece('d', 8, new Queen(ChessBoard, Color.Black));
+            SetNewPiece('e', 8, new King(ChessBoard, Color.Black));
+            SetNewPiece('f', 8, new Bishop(ChessBoard, Color.Black));
+            SetNewPiece('g', 8, new Knight(ChessBoard, Color.Black));
+            SetNewPiece('h', 8, new Rook(ChessBoard, Color.Black));
+            SetNewPiece('a', 7, new Pawn(ChessBoard, Color.Black));
+            SetNewPiece('b', 7, new Pawn(ChessBoard, Color.Black));
+            SetNewPiece('c', 7, new Pawn(ChessBoard, Color.Black));
+            SetNewPiece('d', 7, new Pawn(ChessBoard, Color.Black));
+            SetNewPiece('e', 7, new Pawn(ChessBoard, Color.Black));
+            SetNewPiece('f', 7, new Pawn(ChessBoard, Color.Black));
+            SetNewPiece('g', 7, new Pawn(ChessBoard, Color.Black));
+            SetNewPiece('h', 7, new Pawn(ChessBoard, Color.Black));
         }
     }
 }
