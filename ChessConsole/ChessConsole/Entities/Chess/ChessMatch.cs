@@ -37,6 +37,26 @@ namespace ChessConsole.Entities.Chess
             if (capturedPiece != null)
                 _captured.Add(capturedPiece);
 
+            //# specialmove: Kingside Castling
+            if (p is King && destination.Column == origin.Column + 2)
+            {
+                Position originRook = new Position(origin.Line, origin.Column + 3);
+                Position destinationRook = new Position(origin.Line, origin.Column + 1);
+                Piece R = ChessBoard.RemovePiece(originRook);
+                R.IncrementQtyMovements();
+                ChessBoard.SetPiecePosition(R, destinationRook);
+            }
+
+            //# specialmove: Queenside Castling
+            if (p is King && destination.Column == origin.Column - 2)
+            {
+                Position originRook = new Position(origin.Line, origin.Column - 4);
+                Position destinationRook = new Position(origin.Line, origin.Column - 1);
+                Piece R = ChessBoard.RemovePiece(originRook);
+                R.IncrementQtyMovements();
+                ChessBoard.SetPiecePosition(R, destinationRook);
+            }
+
             return capturedPiece;
         }
 
@@ -50,6 +70,27 @@ namespace ChessConsole.Entities.Chess
                 _captured.Remove(capturedPiece);
             }
             ChessBoard.SetPiecePosition(p, origin);
+
+            //# specialmove: Kingside Castling
+            if (p is King && destination.Column == origin.Column + 2)
+            {
+                Position originRook = new Position(origin.Line, origin.Column + 3);
+                Position destinationRook = new Position(origin.Line, origin.Column + 1);
+                Piece R = ChessBoard.RemovePiece(destinationRook);
+                R.DecrementQtyMovements();
+                ChessBoard.SetPiecePosition(R, originRook);
+            }
+
+            //# specialmove: Queenside Castling
+            if (p is King && destination.Column == origin.Column - 2)
+            {
+                Position originRook = new Position(origin.Line, origin.Column - 4);
+                Position destinationRook = new Position(origin.Line, origin.Column - 1);
+                Piece R = ChessBoard.RemovePiece(destinationRook);
+                R.DecrementQtyMovements();
+                ChessBoard.SetPiecePosition(R, originRook);
+            }
+
         }
 
         public void MakeMove(Position origin, Position destination)
@@ -198,7 +239,7 @@ namespace ChessConsole.Entities.Chess
             SetNewPiece('b', 1, new Knight(ChessBoard, Color.White));
             SetNewPiece('c', 1, new Bishop(ChessBoard, Color.White));
             SetNewPiece('d', 1, new Queen(ChessBoard, Color.White));
-            SetNewPiece('e', 1, new King(ChessBoard, Color.White));
+            SetNewPiece('e', 1, new King(ChessBoard, Color.White, this));
             SetNewPiece('f', 1, new Bishop(ChessBoard, Color.White));
             SetNewPiece('g', 1, new Knight(ChessBoard, Color.White));
             SetNewPiece('h', 1, new Rook(ChessBoard, Color.White));
@@ -215,7 +256,7 @@ namespace ChessConsole.Entities.Chess
             SetNewPiece('b', 8, new Knight(ChessBoard, Color.Black));
             SetNewPiece('c', 8, new Bishop(ChessBoard, Color.Black));
             SetNewPiece('d', 8, new Queen(ChessBoard, Color.Black));
-            SetNewPiece('e', 8, new King(ChessBoard, Color.Black));
+            SetNewPiece('e', 8, new King(ChessBoard, Color.Black, this));
             SetNewPiece('f', 8, new Bishop(ChessBoard, Color.Black));
             SetNewPiece('g', 8, new Knight(ChessBoard, Color.Black));
             SetNewPiece('h', 8, new Rook(ChessBoard, Color.Black));
