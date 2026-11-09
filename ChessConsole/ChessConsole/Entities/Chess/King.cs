@@ -31,7 +31,7 @@ namespace ChessConsole.Entities.Chess
             if (Board.CheckPosition(pos) && CanMove(pos))
                 mat[pos.Line, pos.Column] = true;
 
-            //right
+            //east
             pos.SetValues(Position.Line, Position.Column + 1);
             if (Board.CheckPosition(pos) && CanMove(pos))
                 mat[pos.Line, pos.Column] = true;
@@ -51,7 +51,7 @@ namespace ChessConsole.Entities.Chess
             if (Board.CheckPosition(pos) && CanMove(pos))
                 mat[pos.Line, pos.Column] = true;
 
-            //left
+            //west
             pos.SetValues(Position.Line, Position.Column - 1);
             if (Board.CheckPosition(pos) && CanMove(pos))
                 mat[pos.Line, pos.Column] = true;

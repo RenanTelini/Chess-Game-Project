@@ -43,7 +43,7 @@ namespace ChessConsole.Entities.Chess
                 pos.Line = pos.Line + 1;
             }
 
-            //right
+            //east
             pos.SetValues(Position.Line, Position.Column + 1);
             while (Board.CheckPosition(pos) && CanMove(pos))
             {
@@ -54,7 +54,7 @@ namespace ChessConsole.Entities.Chess
                 pos.Column = pos.Column + 1;
             }
 
-            //left
+            //west
             pos.SetValues(Position.Line, Position.Column - 1);
             while (Board.CheckPosition(pos) && CanMove(pos))
             {
