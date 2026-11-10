@@ -136,6 +136,22 @@ namespace ChessConsole.Entities.Chess
                 throw new BoardException("You cannot put yourself in check!");
             }
 
+            Piece p = ChessBoard.GetPieces(destination);
+
+            //# Specialmove: Promotion
+            if (p is Pawn)
+            {
+                if ((p.Color == Color.White && destination.Line == 0) 
+                    || p.Color == Color.Black && destination.Line == 7)
+                {
+                    p = ChessBoard.RemovePiece(destination);
+                    _pieces.Remove(p);
+                    Piece queen = new Queen(ChessBoard, p.Color);
+                    ChessBoard.SetPiecePosition(queen, destination);
+                    _pieces.Add(queen);
+                }
+            }
+
             if (IsKingInCheck(OpposingPiece(CurrentPlayer)))
                 Check = true;
             else
@@ -148,8 +164,6 @@ namespace ChessConsole.Entities.Chess
                 Turn++;
                 ChangePlayer();
             }
-
-            Piece p = ChessBoard.GetPieces(destination);
 
             //# Specialmove: En Passant
             if (p is Pawn && (destination.Line == origin.Line - 2 || destination.Line == origin.Line + 2))
@@ -296,7 +310,7 @@ namespace ChessConsole.Entities.Chess
             SetNewPiece('f', 2, new Pawn(ChessBoard, Color.White, this));
             SetNewPiece('g', 2, new Pawn(ChessBoard, Color.White, this));
             SetNewPiece('h', 2, new Pawn(ChessBoard, Color.White, this));
-
+            
             SetNewPiece('a', 8, new Rook(ChessBoard, Color.Black));
             SetNewPiece('b', 8, new Knight(ChessBoard, Color.Black));
             SetNewPiece('c', 8, new Bishop(ChessBoard, Color.Black));
