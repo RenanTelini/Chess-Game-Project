@@ -5,8 +5,11 @@ namespace ChessConsole.Entities.Chess
 {
     class Pawn : Piece
     {
-        public Pawn(Board board, Color color) : base(color, board)
+        private ChessMatch _game;
+
+        public Pawn(Board board, Color color, ChessMatch game) : base(color, board)
         {
+            _game = game;
         }
 
         public override string ToString()
@@ -53,6 +56,22 @@ namespace ChessConsole.Entities.Chess
                 pos.SetValues(Position.Line - 1, Position.Column + 1);
                 if (Board.CheckPosition(pos) && HasEnemy(pos))
                     mat[pos.Line, pos.Column] = true;
+
+                //# Specialmove: En Passant
+                if (Position.Line == 3)
+                {
+                    Position left = new Position(Position.Line, Position.Column - 1);
+                    if (Board.CheckPosition(left) && HasEnemy(left) && Board.GetPieces(left) == _game.VulnerableEnPassant)
+                    {
+                        mat[left.Line - 1, left.Column] = true;
+                    }
+
+                    Position right = new Position(Position.Line, Position.Column + 1);
+                    if (Board.CheckPosition(right) && HasEnemy(right) && Board.GetPieces(right) == _game.VulnerableEnPassant)
+                    {
+                        mat[right.Line - 1, right.Column] = true;
+                    }
+                }
             }
             else
             {
@@ -76,6 +95,22 @@ namespace ChessConsole.Entities.Chess
                 pos.SetValues(Position.Line + 1, Position.Column + 1);
                 if (Board.CheckPosition(pos) && HasEnemy(pos))
                     mat[pos.Line, pos.Column] = true;
+
+                //# Specialmove: En Passant
+                if (Position.Line == 4)
+                {
+                    Position left = new Position(Position.Line, Position.Column - 1);
+                    if (Board.CheckPosition(left) && HasEnemy(left) && Board.GetPieces(left) == _game.VulnerableEnPassant)
+                    {
+                        mat[left.Line + 1, left.Column] = true;
+                    }
+
+                    Position right = new Position(Position.Line, Position.Column + 1);
+                    if (Board.CheckPosition(right) && HasEnemy(right) && Board.GetPieces(right) == _game.VulnerableEnPassant)
+                    {
+                        mat[right.Line + 1, right.Column] = true;
+                    }
+                }
             }
 
             return mat;
